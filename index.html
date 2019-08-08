@@ -155,10 +155,24 @@
     <article id="post-bootandsecurity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/bootandsecurity/">SpringBoot整合SpringSecurity简单实现登入登出</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/bootandsecurity/" class="archive-article-date">
+  	<time datetime="2019-08-08T05:24:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>–</p>
-<h1 id="SpringBoot整合SpringSecurity简单实现登入登出"><a href="#SpringBoot整合SpringSecurity简单实现登入登出" class="headerlink" title="SpringBoot整合SpringSecurity简单实现登入登出"></a>SpringBoot整合SpringSecurity简单实现登入登出</h1><h1 id="技术栈-SpringBoot-SpringSecurity-jpa-freemark"><a href="#技术栈-SpringBoot-SpringSecurity-jpa-freemark" class="headerlink" title="技术栈 : SpringBoot + SpringSecurity + jpa + freemark"></a>技术栈 : SpringBoot + SpringSecurity + jpa + freemark</h1><h3 id="1-新建一个spring-springsecurity-login的maven项目"><a href="#1-新建一个spring-springsecurity-login的maven项目" class="headerlink" title="1.新建一个spring-springsecurity-login的maven项目"></a>1.新建一个spring-springsecurity-login的maven项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line"> &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">        xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">   &lt;groupId&gt;com.wuxicloud&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-security-login&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">   &lt;parent&gt;</span><br><span class="line">       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;1.5.6.RELEASE&lt;/version&gt;</span><br><span class="line">   &lt;/parent&gt;</span><br><span class="line">   &lt;properties&gt;</span><br><span class="line">       &lt;author&gt;EalenXie&lt;/author&gt;</span><br><span class="line">       &lt;description&gt;SpringBoot整合SpringSecurity实现简单登入登出&lt;/description&gt;</span><br><span class="line">   &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">   &lt;dependencies&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!--alibaba--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.0.24&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.2.31&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">   &lt;/dependencies&gt;</span><br><span class="line">   &lt;/project&gt;</span><br></pre></td></tr></table></figure>
+        <h1 id="SpringBoot整合SpringSecurity简单实现登入登出"><a href="#SpringBoot整合SpringSecurity简单实现登入登出" class="headerlink" title="SpringBoot整合SpringSecurity简单实现登入登出"></a>SpringBoot整合SpringSecurity简单实现登入登出</h1><h1 id="技术栈-SpringBoot-SpringSecurity-jpa-freemark"><a href="#技术栈-SpringBoot-SpringSecurity-jpa-freemark" class="headerlink" title="技术栈 : SpringBoot + SpringSecurity + jpa + freemark"></a>技术栈 : SpringBoot + SpringSecurity + jpa + freemark</h1><h3 id="1-新建一个spring-springsecurity-login的maven项目"><a href="#1-新建一个spring-springsecurity-login的maven项目" class="headerlink" title="1.新建一个spring-springsecurity-login的maven项目"></a>1.新建一个spring-springsecurity-login的maven项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line"> &lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">        xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">   &lt;groupId&gt;com.wuxicloud&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-security-login&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line">   &lt;parent&gt;</span><br><span class="line">       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">       &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">       &lt;version&gt;1.5.6.RELEASE&lt;/version&gt;</span><br><span class="line">   &lt;/parent&gt;</span><br><span class="line">   &lt;properties&gt;</span><br><span class="line">       &lt;author&gt;EalenXie&lt;/author&gt;</span><br><span class="line">       &lt;description&gt;SpringBoot整合SpringSecurity实现简单登入登出&lt;/description&gt;</span><br><span class="line">   &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">   &lt;dependencies&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-freemarker&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;!--alibaba--&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.0.24&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">           &lt;version&gt;1.2.31&lt;/version&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">       &lt;dependency&gt;</span><br><span class="line">           &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">           &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">           &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">       &lt;/dependency&gt;</span><br><span class="line">   &lt;/dependencies&gt;</span><br><span class="line">   &lt;/project&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。"><a href="#2-准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。" class="headerlink" title="2.准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。"></a>2.准备你的数据库，设计表结构，要用户使用登入登出，新建用户表。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> DROP TABLE IF EXISTS `user`;</span><br><span class="line">CREATE TABLE `user`  (</span><br><span class="line">  `id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `user_uuid` varchar(70) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `telephone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `role` int(10) DEFAULT NULL,</span><br><span class="line">  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `last_ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  `last_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`) USING BTREE</span><br><span class="line">) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS = 1;</span><br></pre></td></tr></table></figure>
 
@@ -197,267 +211,22 @@
     <div class="article-info article-info-index">
       
       
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/08/bootandsecurity/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-my-first-blog" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/my-first-blog/">my-first-blog</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/my-first-blog/" class="archive-article-date">
-  	<time datetime="2019-08-07T10:18:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/my-first-blog/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/hello-world/">springboot整合mongo</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-07T07:44:41.171Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.环境配置
-pom.xml
-    <code><pre>
-    <dependency>
-    <groupid>org.springframework.boot</groupid>
-    <artifactid>spring-boot-starter-data-mongodb</artifactid>
-    </dependency>
-    </pre></code>
-application.yml
-    <code><pre>
-    server:
-        port:8080
-    spring:
-        data:
-            mongodb:
-                uri:mongodb://localhost:27017/test
-    </pre></code>
-第一种
-Dao层
-    <code><pre>
-    public interface Dao extends MongoRepository<emp,string>{</emp,string></pre></code></p>
-
-<pre><code>/**
-*查询所有数据
-*@return
-*/
-publicList&lt;Emp&gt;findAllBy();
-
-}
-</code></pre>
-
-<p></p>
-
-<p>第二种
-Dao层
-    <code><pre>
-  packagecom.example.demo.dao;</pre></code></p>
-
-<p>importcom.example.demo.entity.Emp;
-  importorg.springframework.beans.factory.annotation.Autowired;
-  importorg.springframework.data.mongodb.core.MongoTemplate;
-  importorg.springframework.data.mongodb.core.query.Criteria;
-  importorg.springframework.data.mongodb.core.query.Query;
-  importorg.springframework.data.mongodb.core.query.Update;
-  importorg.springframework.stereotype.Component;
-  importjava.util.List;
-  @Component
-  publicclassDao{</p>
-
-<p>@Autowired
-  privateMongoTemplatemongoTemplate;</p>
-
-<p>/**
-  *创建对象
-  <em>/
-  publicvoidsaveTest(Empemp){
-  mongoTemplate.save(emp);
-  }
-  /</em>*
-*查询全部
-<em>/
-publicList<emp>findAll(){
-List<emp>all=mongoTemplate.findAll(Emp.class);
-returnall;
-}
-/</emp></emp></em>*
-*根据用户名查询对象
-*/
-publicEmpfindTestByName(Stringname){
-Queryquery=newQuery(Criteria.where("name").is(name));
-Empone=mongoTemplate.findOne(query,Emp.class);
-returnone;
-}</p>
-
-<p>/**
-*更新对象
-*@paramemp
-*/
-publicvoidupdate(Empemp){
-Queryquery=newQuery(Criteria.where("id").is(emp.getId()));
-Updateupdate=newUpdate().set("name",emp.getName());
-//更新查询返回结果集的第一条
-mongoTemplate.updateFirst(query,update,Emp.class);
-}</p>
-
-<p>/**
-*删除对象
-*@paramid
-*/
-publicvoiddeleteTestById(Integerid){
-Queryquery=newQuery(Criteria.where("id").is(id));
-mongoTemplate.remove(query,Emp.class);
-}
-}
-entity层
-importlombok.AllArgsConstructor;
-importlombok.Data;
-importlombok.NoArgsConstructor;</p>
-
-<p>importjava.io.Serializable;</p>
-
-<p>@Data//gettersettertoString等方法
-@AllArgsConstructor//带参数的构造方法
-@NoArgsConstructor//不带参数的构造方法
-publicclassEmpimplementsSerializable{</p>
-
-<p>privateintid;
-privateStringname;
-privateStringaddr;</p>
-
-<p>}</p>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/code//" class="article-tag-list-link color5">code</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/08/bootandsecurity/">展开全文 >></a>
         </p>
       
 
@@ -657,7 +426,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color1">SpringBoot</a>
               </li>
             
             <div class="clearfix"></div>
