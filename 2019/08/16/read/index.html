@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>springcloud项目搭建初步 | 王泽的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="构建SpringCloud项目1.File-&amp;gt;new-&amp;gt;Project-&amp;gt;填写项目名-&amp;gt;finish 2.pom.xml文件修改123456789101112131415161718192021222324252627282930313233343536373839404142&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;U">
+  <meta name="description" content="构建SpringCloud项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springcloud项目搭建初步">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/read/index.html">
 <meta property="og:site_name" content="王泽的个人博客">
-<meta property="og:description" content="构建SpringCloud项目1.File-&amp;gt;new-&amp;gt;Project-&amp;gt;填写项目名-&amp;gt;finish 2.pom.xml文件修改123456789101112131415161718192021222324252627282930313233343536373839404142&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;U">
+<meta property="og:description" content="构建SpringCloud项目">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/08/16/img/111">
 <meta property="og:image" content="http://yoursite.com/2019/08/16/img/222">
-<meta property="og:updated_time" content="2019-08-16T03:46:49.949Z">
+<meta property="og:updated_time" content="2019-08-16T03:50:16.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springcloud项目搭建初步">
-<meta name="twitter:description" content="构建SpringCloud项目1.File-&amp;gt;new-&amp;gt;Project-&amp;gt;填写项目名-&amp;gt;finish 2.pom.xml文件修改123456789101112131415161718192021222324252627282930313233343536373839404142&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;U">
+<meta name="twitter:description" content="构建SpringCloud项目">
 <meta name="twitter:image" content="http://yoursite.com/2019/08/16/img/111">
   
     <link rel="alternative" href="/atom.xml" title="王泽的个人博客" type="application/atom+xml">
@@ -181,7 +181,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="构建SpringCloud项目"><a href="#构建SpringCloud项目" class="headerlink" title="构建SpringCloud项目"></a>构建SpringCloud项目</h1><h2 id="1-File-gt-new-gt-Project-gt-填写项目名-gt-finish"><a href="#1-File-gt-new-gt-Project-gt-填写项目名-gt-finish" class="headerlink" title="1.File-&gt;new-&gt;Project-&gt;填写项目名-&gt;finish"></a>1.File-&gt;new-&gt;Project-&gt;填写项目名-&gt;finish</h2><p><img src="../img/111" alt="1"><br><img src="../img/222" alt="2"></p>
+        <h1 id="构建SpringCloud项目"><a href="#构建SpringCloud项目" class="headerlink" title="构建SpringCloud项目"></a>构建SpringCloud项目</h1><a id="more"></a>
+<h2 id="1-File-gt-new-gt-Project-gt-填写项目名-gt-finish"><a href="#1-File-gt-new-gt-Project-gt-填写项目名-gt-finish" class="headerlink" title="1.File-&gt;new-&gt;Project-&gt;填写项目名-&gt;finish"></a>1.File-&gt;new-&gt;Project-&gt;填写项目名-&gt;finish</h2><p><img src="../img/111" alt="1"><br><img src="../img/222" alt="2"></p>
 <h2 id="2-pom-xml文件修改"><a href="#2-pom-xml文件修改" class="headerlink" title="2.pom.xml文件修改"></a>2.pom.xml文件修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;!--确定父项目坐标--&gt;</span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;com.fem&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;cloudtest&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">    &lt;artifactId&gt;cloudtest-consumer&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.1.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!-- 这是mybatis-plus的代码自动生成器 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;3.1.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="3-删除src文件夹"><a href="#3-删除src文件夹" class="headerlink" title="3.删除src文件夹"></a>3.删除src文件夹</h2><h2 id="4-新建模块eureka-服务端-注意：在主项目文件夹上右击-new-module"><a href="#4-新建模块eureka-服务端-注意：在主项目文件夹上右击-new-module" class="headerlink" title="4.新建模块eureka 服务端  (注意：在主项目文件夹上右击-new-module)"></a>4.新建模块eureka 服务端  (注意：在主项目文件夹上右击-new-module)</h2><pre><code>4.1 图示
@@ -301,15 +302,6 @@
 
   
 <nav id="article-nav">
-  
-    <a href="/2019/08/16/a/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          a
-        
-      </div>
-    </a>
   
   
     <a href="/2019/08/08/bootandsecurity/" id="article-nav-older" class="article-nav-link-wrap">
